@@ -1,0 +1,81 @@
+
+<!-- Nav bar -->
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid position-relative">
+    <!-- Brand with horizontal + rotation animation -->
+    <a class="navbar-brand fw-bold spinning-brand" routerLink="/">StudentApp</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+
+      <div class="d-flex">
+        <button class="btn btn-primary" (click)="openNew()" >
+          <i class="bi bi-plus-lg me-2"></i> Add Student
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <p-table #dt2 class="modern-table" [value]="studentList" [(selection)]="selectedStudents" dataKey="id"
+    [paginator]="true" [rows]="4" [rowsPerPageOptions]="[5,10,20]" [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} students" [rowHover]="true"
+    [responsiveLayout]="'scroll'" [globalFilterFields]="['name','phone']">
+
+    <ng-template pTemplate="caption">
+      <div class="caption-container">
+        <h5>Manage Students</h5>
+        <div class="search-wrapper">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" (input)="applyFilter($event, dt2)" placeholder="Search by name or phone" />
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-template #header>
+      <tr>
+        <th pSortableColumn="id"># <p-sortIcon field="id" /></th>
+        <th pSortableColumn="name">Name <p-sortIcon field="name" /></th>
+        <th pSortableColumn="phone">Phone <p-sortIcon field="phone" /></th>
+        <th pSortableColumn="gender">Gender <p-sortIcon field="gender" /></th>
+        <th pSortableColumn="dob">DOB <p-sortIcon field="dob" /></th>
+        <th pSortableColumn="studyLevel1Id">Level 1 <p-sortIcon field="studyLevel1Id" /></th>
+        <th pSortableColumn="studyLevel2Id">Level 2 <p-sortIcon field="studyLevel2Id" /></th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-student let-i="rowIndex">
+      <tr [pSelectableRow]="student">
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.phone }}</td>
+        <td>{{ student.gender }}</td>
+        <td>{{ student.dob }}</td>
+        <td>{{ getLevel1Name(student.studyLevel1Id) }}</td>
+        <td>{{ getLevel2Name(student.studyLevel2Id) }}</td>
+        <td class="action-buttons">
+          <button pButton pRipple icon="pi pi-pencil" class="btn-info" (click)="editStudent(student.id)" [routerLink]="['/form', student.id]"></button>
+          <button pButton pRipple icon="pi pi-trash" class="btn-danger" (click)="deleteStudent(student)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<app-student-form 
+  [dialogVisible]= "studentDialog"
+  [student]="student" 
+  (save)="onSave($event)" 
+  (dialogVisible_emitter)="hideDialog()">
+</app-student-form>
+

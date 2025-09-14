@@ -1,0 +1,4 @@
+::ng-deep .p-dialog .p-dialog-header {
+  background-color: #212529; /* dark */
+  color: #fff; /* white text */
+}
