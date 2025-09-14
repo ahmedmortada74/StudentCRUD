@@ -64,7 +64,15 @@
         <td>{{ getLevel1Name(student.studyLevel1Id) }}</td>
         <td>{{ getLevel2Name(student.studyLevel2Id) }}</td>
         <td class="action-buttons">
-          <button pButton pRipple icon="pi pi-pencil" class="btn-info" (click)="editStudent(student.id)" (click)="openNew()"></button>
+          <button 
+  pButton 
+  pRipple 
+  icon="pi pi-pencil" 
+  class="btn-info" 
+  (click)="editStudent(student)">
+</button>
+
+          <!-- <button pButton pRipple icon="pi pi-pencil" class="btn-info" (click)="editStudent(student)" (click)="openNew()"></button> -->
           <button pButton pRipple icon="pi pi-trash" class="btn-danger" (click)="deleteStudent(student)"></button>
         </td>
       </tr>

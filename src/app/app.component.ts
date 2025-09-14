@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./components/header/header.component";
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Student} from './student/student.module';
 import { StudentFormComponent } from './components/student-form/student-form.component';
@@ -8,7 +7,7 @@ import { StudentFormComponent } from './components/student-form/student-form.com
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent ,StudentFormComponent,ReactiveFormsModule],
+  imports: [RouterOutlet ,StudentFormComponent,ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
