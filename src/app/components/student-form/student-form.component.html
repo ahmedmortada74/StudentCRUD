@@ -1,86 +1,91 @@
-<p-dialog [(visible)]="dialogVisible" [style]="{ width: 'auto',height:'auto' }"
-[maximizable]="true" [resizable]="true" position="top" [closable]="false" >
-    <form [formGroup]="studentForm" class="p-4 bg-white">
+<p-dialog 
+  [(visible)]="dialogVisible" 
+  [style]="{ width: '600px', height:'auto' }"
+  [maximizable]="true" 
+  [resizable]="true" 
+  position="top" 
+  [closable]="false"
+  [modal]="true"
+  [draggable]="true"
+>
+  <form [formGroup]="studentForm" class="dark-form">
 
-        <div class="row mb-3">
-            
-            <div class="col">
-                <label class="form-label">Name</label>
-                <input type="text" class="form-control" formControlName="name" placeholder="Enter Name">
-                 <div *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched" class="text-danger">
-  Name is required
-</div>
+    <h4 class="mb-4 text-center text-info fw-bold">🎓 Student Registration</h4>
 
-            </div>
+    <div class="row mb-3">
+      <!-- Name -->
+      <div class="col">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="name" placeholder="Enter Name">
+        <div *ngIf="studentForm.get('name')?.invalid && studentForm.get('name')?.touched" class="error-text">
+          Name is required
+        </div>
+      </div>
 
-            
-            <div class="col">
-                <label class="form-label">Phone</label>
-                <input type="tel" class="form-control" formControlName="phone" placeholder="Enter Phone">
-                   <div class="text-danger mt-1 small" *ngIf="studentForm.get('phone')?.invalid && studentForm.get('phone')?.touched">
+      <!-- Phone -->
+      <div class="col">
+        <label class="form-label">Phone</label>
+        <input type="tel" class="form-control" formControlName="phone" placeholder="Enter Phone">
+        <div class="error-text" *ngIf="studentForm.get('phone')?.invalid && studentForm.get('phone')?.touched">
           Phone must be 10–15 digits.
         </div>
-            </div>
-        </div>
+      </div>
+    </div>
 
-        <div class="row mb-3">
-            
-            <div class="col">
-                <label class="form-label">Date of Birth</label>
-                <input type="date" class="form-control" formControlName="dob">
-                 <div class="text-danger mt-1 small" *ngIf="studentForm.get('dob')?.invalid && studentForm.get('dob')?.touched">
+    <div class="row mb-3">
+      <!-- DOB -->
+      <div class="col">
+        <label class="form-label">Date of Birth</label>
+        <input type="date" class="form-control" formControlName="dob">
+        <div class="error-text" *ngIf="studentForm.get('dob')?.invalid && studentForm.get('dob')?.touched">
           Date of Birth is required.
         </div>
-            </div>
+      </div>
 
-            
-            <div class="col">
-                <label class="form-label">Gender</label>
-                <select class="form-select" formControlName="gender">
-                    <option value="" disabled>Choose Gender</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-                  <div class="text-danger mt-1 small" *ngIf="studentForm.get('gender')?.invalid && studentForm.get('gender')?.touched">
+      <!-- Gender -->
+      <div class="col">
+        <label class="form-label">Gender</label>
+        <select class="form-select" formControlName="gender">
+          <option value="" disabled>Choose Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+        <div class="error-text" *ngIf="studentForm.get('gender')?.invalid && studentForm.get('gender')?.touched">
           Please select Gender.
         </div>
-            </div>
-        </div>
+      </div>
+    </div>
 
-        <div class="row mb-3">
-           
-            <div class="col">
-                <label class="form-label">Study Level 1</label>
-                <select class="form-select" formControlName="studyLevel1Id">
-                    <option value="" disabled selected>Choose Level 1</option>
-                    <option *ngFor="let l1 of level1Options" [value]="l1.id">{{ l1.name }}</option>
-                </select>
-                  <div class="text-danger mt-1 small" *ngIf="studentForm.get('studyLevel1Id')?.invalid && studentForm.get('studyLevel1Id')?.touched">
+    <div class="row mb-3">
+      <!-- Level 1 -->
+      <div class="col">
+        <label class="form-label">Study Level 1</label>
+        <select class="form-select" formControlName="studyLevel1Id">
+          <option value="" disabled selected>Choose Level 1</option>
+          <option *ngFor="let l1 of level1Options" [value]="l1.id">{{ l1.name }}</option>
+        </select>
+        <div class="error-text" *ngIf="studentForm.get('studyLevel1Id')?.invalid && studentForm.get('studyLevel1Id')?.touched">
           Please select Level 1.
         </div>
-            </div>
+      </div>
 
-          
-            <div class="col">
-                <label class="form-label">Study Level 2</label>
-                <select class="form-select" formControlName="studyLevel2Id">
-                    <option value="" disabled selected>Choose Level 2</option>
-                    <option *ngFor="let l2 of level2Options" [value]="l2.id">{{ l2.name }}</option>
-                </select>
-                 <div class="text-danger mt-1 small" *ngIf="studentForm.get('studyLevel2Id')?.invalid && studentForm.get('studyLevel2Id')?.touched">
+      <!-- Level 2 -->
+      <div class="col">
+        <label class="form-label">Study Level 2</label>
+        <select class="form-select" formControlName="studyLevel2Id">
+          <option value="" disabled selected>Choose Level 2</option>
+          <option *ngFor="let l2 of level2Options" [value]="l2.id">{{ l2.name }}</option>
+        </select>
+        <div class="error-text" *ngIf="studentForm.get('studyLevel2Id')?.invalid && studentForm.get('studyLevel2Id')?.touched">
           Please select Level 2.
         </div>
-            </div>
+      </div>
+    </div>
 
-
-        </div>
-        <div class="d-flex justify-content-end mt-4 gap-2">
-            <button type="button" class="btn btn-secondary" (click)="send(false)">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="onSave()">Save</button>
-        </div>
-    </form>
-  
-  </p-dialog>
-
-
-
+    <!-- Buttons -->
+    <div class="d-flex justify-content-end mt-4 gap-2">
+      <button type="button" class="btn btn-outline-light" (click)="send(false)">Cancel</button>
+      <button type="button" class="btn btn-info px-4" (click)="onSave()">Save</button>
+    </div>
+  </form>
+</p-dialog>

@@ -99,8 +99,8 @@ export class StudentFormComponent implements OnInit {
     }
 
     localStorage.setItem("StdData", JSON.stringify(this.studentList));
-    // alert('Student saved successfully!');
     // this.router.navigate(['/student']);
+    alert('Student saved successfully!');
     this.send(false);
   }
 
