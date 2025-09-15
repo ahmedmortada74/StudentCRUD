@@ -10,6 +10,7 @@ import { StudentFormComponent } from '../student-form/student-form.component';
 
 
 
+
 @Component({
   selector: 'app-students-list',
   standalone: true,
@@ -20,43 +21,47 @@ import { StudentFormComponent } from '../student-form/student-form.component';
 })
 
 export class StudentsListComponent implements OnInit {
-  constructor (private router: Router){}
+
   @ViewChild('dt2') dt2: any;
-  localStorageService: any;
   @Input() visible = false;
-  selectedStudents: Student[] = [];
-  studentDialog: boolean = false;
-  student: any = {};
-  submitted: boolean = false;
   studentList: Student[] = [];
-  
+  selectedStudents: Student[] = [];
+  studentPars : any = {};
+  studentDialog: boolean = false;
+  submitted: boolean = false;
+  localStorageService: any;
+
+  constructor(private router: Router) { 
+    console.log(` student is null =  ${JSON.stringify(this.studentPars)}`)
+   }
+
+
   ngOnInit(): void {
     const data = localStorage.getItem('StdData');
     if (data) this.studentList = JSON.parse(data);
   }
-  //Filter Name Or Phone
-  applyFilter(event: Event, dt: Table) {
-    const value = (event.target as HTMLInputElement).value;
-    dt.filterGlobal(value, 'contains');
-  }
 
- 
   openNew() {
-    this.student = {};
+    this.studentPars = {};
     this.submitted = false;
     this.studentDialog = true;
-    
   }
-     onSave(student: Student) {
+
+  onSave(student: Student) {
     let x = this.localStorageService.upsert(student);
-    // this.studentList = this.localStorageService.getStudents();
-     this.studentList = [...this.localStorageService.getStudents()];
+    this.studentList = this.localStorageService.getStudents();
+    // this.studentList = [...this.localStorageService.getStudents()];
     this.studentDialog = false;
   }
+
+
+
+
   // Edit
   editStudent(student: Student) {
-    this.student = { ...student };
-    this.studentDialog = true;
+    this.openNew();
+    // console.log('editStudent called ', student);
+    this.studentPars = { ...student };
   }
 
   // Delete 
@@ -81,10 +86,17 @@ export class StudentsListComponent implements OnInit {
     this.submitted = false;
   }
 
+  //Filter Name Or Phone
+  applyFilter(event: Event, dt: Table) {
+    const value = (event.target as HTMLInputElement).value;
+    dt.filterGlobal(value, 'contains');
+  }
+  
+  // Get Level 1 
   getLevel1Name(id: any) {
     return LEVEL1.find(l => l.id === +id)?.name || '';
   }
-
+  // Get Level 2 
   getLevel2Name(id: any) {
     return LEVEL2.find(l => l.id === +id)?.name || '';
   }

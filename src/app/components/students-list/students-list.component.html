@@ -64,27 +64,18 @@
         <td>{{ getLevel1Name(student.studyLevel1Id) }}</td>
         <td>{{ getLevel2Name(student.studyLevel2Id) }}</td>
         <td class="action-buttons">
-          <button 
-  pButton 
-  pRipple 
-  icon="pi pi-pencil" 
-  class="btn-info" 
-  (click)="editStudent(student)">
-</button>
-
-          <!-- <button pButton pRipple icon="pi pi-pencil" class="btn-info" (click)="editStudent(student)" (click)="openNew()"></button> -->
+  
+          <button pButton pRipple icon="pi pi-pencil" class="btn-info" (click)="editStudent(student)"></button>
           <button pButton pRipple icon="pi pi-trash" class="btn-danger" (click)="deleteStudent(student)"></button>
         </td>
-      </tr>
     </ng-template>
   </p-table>
 </div>
 
 <app-student-form 
   [dialogVisible]= "studentDialog"
-  [student]="student" 
+  [student]="studentPars" 
   (save)="onSave($event)" 
   (dialogVisible_emitter)="hideDialog()">
   <p-table [value]="studentList"></p-table>
 </app-student-form>
-

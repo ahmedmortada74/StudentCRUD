@@ -1,14 +1,6 @@
-<p-dialog 
-  [(visible)]="dialogVisible" 
-  [style]="{ width: '600px', height:'auto' }"
-  [maximizable]="true" 
-  [resizable]="true" 
-  position="top" 
-  [closable]="false"
-  [modal]="true"
-  [draggable]="true"
->
-  <form [formGroup]="studentForm" class="dark-form">
+<p-dialog [(visible)]="dialogVisible" [style]="{ width: '600px', height:'auto' }" [maximizable]="true"
+  [resizable]="true" position="top" [closable]="false" [modal]="true" [draggable]="true">
+  <form [formGroup]="studentForm" class="dark-form" >
 
     <h4 class="mb-4 text-center text-info fw-bold">🎓 Student Registration</h4>
 
@@ -64,7 +56,8 @@
           <option value="" disabled selected>Choose Level 1</option>
           <option *ngFor="let l1 of level1Options" [value]="l1.id">{{ l1.name }}</option>
         </select>
-        <div class="error-text" *ngIf="studentForm.get('studyLevel1Id')?.invalid && studentForm.get('studyLevel1Id')?.touched">
+        <div class="error-text"
+          *ngIf="studentForm.get('studyLevel1Id')?.invalid && studentForm.get('studyLevel1Id')?.touched">
           Please select Level 1.
         </div>
       </div>
@@ -76,7 +69,8 @@
           <option value="" disabled selected>Choose Level 2</option>
           <option *ngFor="let l2 of level2Options" [value]="l2.id">{{ l2.name }}</option>
         </select>
-        <div class="error-text" *ngIf="studentForm.get('studyLevel2Id')?.invalid && studentForm.get('studyLevel2Id')?.touched">
+        <div class="error-text"
+          *ngIf="studentForm.get('studyLevel2Id')?.invalid && studentForm.get('studyLevel2Id')?.touched">
           Please select Level 2.
         </div>
       </div>
